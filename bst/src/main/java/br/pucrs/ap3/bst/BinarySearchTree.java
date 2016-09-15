@@ -6,16 +6,25 @@ package br.pucrs.ap3.bst;
  *
  */
 public class BinarySearchTree {
+<<<<<<< HEAD
 
 	private static class Node {
 		int key;
 		Node left, right;
 
+=======
+ 
+	private static class Node {
+		int key;
+		Node left, right;
+		
+>>>>>>> 45d6c28010e5ab5ca5763466574e0a6584df0ed9
 		Node(int key) {
 			this.key = key;
 			left = right = null;
 		}
 	}
+<<<<<<< HEAD
 
 	private Node root;
 
@@ -70,4 +79,11 @@ public class BinarySearchTree {
 		return toString0(node.left) + node.key + toString0(node.right);
 	}
 
+=======
+	
+	
+	private Node root;
+	
+	
+>>>>>>> 45d6c28010e5ab5ca5763466574e0a6584df0ed9
 }
