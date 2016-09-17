@@ -1,5 +1,8 @@
 package br.pucrs.ap3.bst;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author marco.mangan@pucrs.br
@@ -10,7 +13,7 @@ public class BinarySearchTree {
 	private static class Node {
 		int key;
 		Node left, right;
-		
+
 		Node(int key) {
 			this.key = key;
 			left = right = null;
@@ -18,19 +21,29 @@ public class BinarySearchTree {
 	}
 
 	private Node root;
+	private int count;
 
+	/**
+	 * 
+	 */
 	public BinarySearchTree() {
 		root = null;
+		count = 0;
 	}
 
+	/**
+	 * 
+	 * @param key
+	 */
 	public void add(int key) {
 		root = add0(key, root);
 	}
 
 	private Node add0(int key, Node node) {
-		if (node == null)
-			return new Node(key);
-
+		if (node == null) {
+			count++;
+			return new Node(key); // ponto de inserção localizado
+		}
 		if (node.key > key)
 			node.left = add0(key, node.left);
 		else if (node.key < key)
@@ -41,6 +54,11 @@ public class BinarySearchTree {
 		return node;
 	}
 
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public boolean contains(int key) {
 
 		return contains0(key, root);
@@ -59,9 +77,34 @@ public class BinarySearchTree {
 		return contains0(key, node.right);
 	}
 
+	public int size() {
+		return count;
+	}
+
+	public List<Integer> getPathTo(int key) {
+		List<Integer> path = new ArrayList<Integer>();
+		getPathTo0(key, root, path);
+		return path;
+	}
+
+	private void getPathTo0(int key, Node node, List<Integer> path) {
+		if (node == null)
+			throw new RuntimeException("Chave não encontrada!");
+
+		path.add(node.key);
+
+		if (node.key == key)
+			return;
+
+		if (node.key > key)
+			getPathTo0(key, node.left, path);
+		else
+			getPathTo0(key, node.right, path);
+	}
+
 	@Override
 	public String toString() {
-		return toString0(root);
+		return "S=" + count + " " + toString0(root);
 	}
 
 	private String toString0(Node node) {
@@ -69,4 +112,24 @@ public class BinarySearchTree {
 			return " # ";
 		return toString0(node.left) + node.key + toString0(node.right);
 	}
+
+	public List<Integer> getLevel(int level) {
+		List<Integer> nodes = new ArrayList<Integer>();
+		getLevel0(root, 0, level, nodes);
+		return nodes;
+	}
+
+	private void getLevel0(Node node, int c, int level, List<Integer> nodes) {
+		if (node == null)
+			return;
+
+		if (c == level) {
+			nodes.add(node.key);
+			return;
+		}
+
+		getLevel0(node.left, c + 1, level, nodes);
+		getLevel0(node.right, c + 1, level, nodes);
+	}
+
 }
