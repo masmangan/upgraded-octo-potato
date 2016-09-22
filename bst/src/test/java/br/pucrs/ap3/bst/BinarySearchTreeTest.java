@@ -10,7 +10,7 @@ public class BinarySearchTreeTest {
 	public void testSingleNode() {
 		BinarySearchTree bst = new BinarySearchTree();
 		bst.add(20);
-		String expected = "S=1  # 20 # ";
+		String expected = "S=1  # K=20 D=0 L=0 H=0 # ";
 		String actual = bst.toString();
 		assertEquals(expected, actual);
 	}
