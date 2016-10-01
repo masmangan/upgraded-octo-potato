@@ -11,7 +11,7 @@ public class AVLApp {
 		System.out.println("AVL!");
 		AVLBinarySearchTree bst = new AVLBinarySearchTree();
 //		int ns[] = { 30, 20, 10 };
-		int ns[] = { 30, 10, 20 };
+		int ns[] = { 10, 20, 30 };
 		System.out.println(bst);
 		for (int n : ns) {
 			bst.add(n);
