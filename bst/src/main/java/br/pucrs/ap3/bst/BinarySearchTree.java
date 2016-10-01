@@ -104,13 +104,35 @@ public class BinarySearchTree {
 
 	@Override
 	public String toString() {
-		return "S=" + count + " " + toString0(root);
+		return "S=" + count + " " + toString0(root, 0);
 	}
 
-	private String toString0(Node node) {
+	private String toString0(Node node, int level) {
 		if (node == null)
 			return " # ";
-		return toString0(node.left) + node.key + toString0(node.right);
+		return toString0(node.left, level + 1) 
+				+ "K=" + node.key 
+				+ " D=" + degree(node) 
+				+ " L=" + level  
+				+ " H=" + height(node)
+				+ " B=" + (height(node.left) - height(node.right))
+				+  toString0(node.right, level + 1);
+	}
+
+	private int height(Node node) {
+		if (node == null)
+			return -1;
+		return 1 + Math.max(height(node.left), height(node.right));
+	}
+
+	private int degree(Node node) {
+		int d = 0;
+		if (node.left != null)
+			d++;
+		if (node.right != null)
+			d++;
+		
+		return d;
 	}
 
 	public List<Integer> getLevel(int level) {
