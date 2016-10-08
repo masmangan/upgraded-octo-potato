@@ -23,4 +23,38 @@ public class Heap {
         }
         return true;
     }
+
+    public static void heapfy(int v[]) {
+        if (v == null)
+            throw new IllegalArgumentException();
+        for (int i = v.length / 2; i >= 1 ; i--) {
+            downheap(i, v);
+
+        }
+    }
+
+    private static void downheap(int i, int[] v) {
+        int pe = 2 * i;
+        int pd = pe + 1;
+        while (pe < v.length) {
+            int menor = pe; // posição do menor filho
+            if (pd < v.length)
+                if (v[pd] < v[pe])
+                    menor = pd;
+            if (v[menor] >= v[i])
+                return;
+            swap(v, menor, i);
+            i = menor;
+            pe = 2 * i;
+            pd = pe + 1;
+        }
+    }
+
+    private static void swap(int[] v, int a, int b) {
+        int tmp = v[a];
+        v[a] = v[b];
+        v[b] = tmp;
+    }
+
+
 }

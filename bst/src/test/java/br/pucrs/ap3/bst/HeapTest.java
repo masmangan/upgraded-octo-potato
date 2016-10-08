@@ -3,6 +3,7 @@ package br.pucrs.ap3.bst;
 import br.pucrs.ap3.heap.Heap;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class HeapTest {
@@ -51,5 +52,22 @@ public class HeapTest {
         boolean actual = Heap.isMinHeap(v);
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testMinHeapfy() {
+        int actual[] = {0, 1, 2, 3};
+        int expected[] = {0, 1, 2, 3};
+        Heap.heapfy(actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void testMaxHeapfy() {
+        int actual[] = {0, 3, 2, 1};
+        int expected[] = {0, 1, 2, 3};
+        Heap.heapfy(actual);
+        assertArrayEquals(expected, actual);
+    }
+
 
 }
