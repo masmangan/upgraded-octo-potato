@@ -166,6 +166,27 @@ public class AVLBinarySearchTree {
 				+ height(node) + " B=" + (height(node.left) - height(node.right)) + toString0(node.right, level + 1);
 	}
 
+	public String dump() {
+		return dump0(root, 0);
+	}
+
+	private String dump0(Node node, int level) {
+		if (node == null)
+			return "";
+		String r = pad(level) + "K=" + node.key + "\n";
+		r += dump0(node.left, level + 1);
+		r += dump0(node.right, level + 1);
+		return r;
+	}
+
+	private String pad(int level) {
+		String p = "";
+		for (int i = 0; i < level; i++)
+			p += ".";
+		return p;
+	}
+
+
 	private int height(Node node) {
 		if (node == null)
 			return -1;
