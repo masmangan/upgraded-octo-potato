@@ -29,7 +29,8 @@ public class App {
 //		System.out.printf("N0: %s%n", bst.getLevel(0));
 //		System.out.printf("N1: %s%n", bst.getLevel(1));
 //		System.out.printf("N2: %s%n", bst.getLevel(2));
-		bst.printByOddLevel();
+		//bst.printByOddLevel();
+		bst.getPathToLeaf(20);
 		
 		
 	}

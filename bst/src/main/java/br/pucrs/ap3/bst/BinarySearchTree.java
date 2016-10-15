@@ -165,7 +165,7 @@ public class BinarySearchTree {
 				}
 			}
 			if (print) {
-				//System.out.println(level);
+				// System.out.println(level);
 				System.out.println("Nível: " + c);
 			}
 			//
@@ -173,6 +173,43 @@ public class BinarySearchTree {
 			level = getLevel(c);
 		}
 
+	}
+
+	/**
+	 * 6. Escreva um algoritmo que apresente o caminho de um nodo que contém um
+	 * determinado valor até a sua folha, considerando o caminho de maior
+	 * altura.
+	 * 
+	 */
+	public void getPathToLeaf(int key) {
+		List<Integer> path = getPathToLeaf0(key, root);
+		System.out.println(path);
+	}
+
+	private List<Integer> getPathToLeaf0(int key, Node node) {
+		if (node == null)
+			return null;
+		if (node.key == key) {
+			List<Integer> pathFrom = getPathToLeaf1(node);
+			return pathFrom;
+		}
+		if (node.key > key)
+			return getPathToLeaf0(key, node.left);
+		return getPathToLeaf0(key, node.right);
+	}
+
+	private List<Integer> getPathToLeaf1(Node node) {
+		if (node == null)
+			return  new ArrayList<Integer>();
+		List<Integer> left = getPathToLeaf1(node.left);
+		List<Integer> right = getPathToLeaf1(node.right);
+		if (left.size() > right.size()) {
+			left.add(node.key);
+			return left;
+		} else {
+			right.add(node.key);
+			return right;
+		}
 	}
 
 }
