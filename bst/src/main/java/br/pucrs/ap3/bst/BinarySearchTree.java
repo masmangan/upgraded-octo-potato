@@ -1,3 +1,4 @@
+
 package br.pucrs.ap3.bst;
 
 import java.util.ArrayList;
