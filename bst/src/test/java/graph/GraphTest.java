@@ -73,5 +73,14 @@ public class GraphTest {
         float actual[] = g.getD();
         assertArrayEquals(expected, actual, 0.001f);
     }
-
+    @Test
+    public void testSimpleP() {
+        int expected[] = {0, 0, 1, 2};
+        Graph g = new Graph(3);
+        g.addConnection(1, 2);
+        g.addConnection(2, 3);
+        g.bfs(1);
+        int actual[] = g.getP();
+        assertArrayEquals(expected, actual);
+    }
 }
