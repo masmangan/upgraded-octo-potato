@@ -116,4 +116,46 @@ public class Graph {
         q.add(s);
     }
 
+
+    private int time;
+    private float f[];
+
+    public void dfs() {
+        d = new float[m.length];
+        f = new float[m.length];
+        // Linhas 1, 2 e 3
+        color = new int[m.length]; // WHITE
+        p = new int[m.length]; // NIL
+        // Linha 4
+        time = 0;
+        // Linhas 5, 6 e 7
+        for (int u = 1; u < d.length; u++) {
+            if (color[u] == WHITE)
+                dfsVisit(u);
+        }
+    }
+
+    public float[] getF() {
+        return f;
+    }
+
+    private void dfsVisit(int u) {
+        // Linhas 1, 2 e 3
+        color[u] = GRAY;
+        time = time  +1;
+        d[u] = time;
+    // Linhas 4-7
+        for (Integer v : Adj(u)) {
+            if (color[v] == WHITE) {
+                p[v] = u;
+                dfsVisit(v);
+            }
+        }
+        // Linhas 8 e 9
+        color[u] = BLACK;
+        time = time  +1;
+        f[u] = time;
+    }
+
+
 }
