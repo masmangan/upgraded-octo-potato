@@ -10,11 +10,19 @@ public class Graph {
 	public static final int BLACK = 2;
 
 	private int[][] m;
+	private boolean directed;
 
 	public Graph(int size) {
 		checkSize(size);
 		int n = size + 1;
 		m = new int[n][n];
+		directed = false;
+	}
+	public Graph(int size, boolean directed) {
+		checkSize(size);
+		int n = size + 1;
+		m = new int[n][n];
+		this.directed = directed;
 	}
 
 	private void checkSize(int size) {
@@ -44,7 +52,9 @@ public class Graph {
 		if (j >= m.length)
 			throw new IllegalArgumentException();
 		m[i][j] = 1;
+		if (!directed) {
 		m[j][i] = 1;
+		}
 	}
 
 	public List<Integer> Adj(int n) {
@@ -119,9 +129,14 @@ public class Graph {
 
     private int time;
     private float f[];
+	private ArrayList<Integer> sorted;
 
     public void dfs() {
-        d = new float[m.length];
+    	// topological sort
+    	sorted = new ArrayList<Integer>();
+//
+    	
+    	d = new float[m.length];
         f = new float[m.length];
         // Linhas 1, 2 e 3
         color = new int[m.length]; // WHITE
@@ -155,7 +170,19 @@ public class Graph {
         color[u] = BLACK;
         time = time  +1;
         f[u] = time;
+        // topological sort
+        sorted.add(0, u);
     }
 
-
+    public List<Integer> topologicalSort() {
+    	// TODO:
+    	dfs();
+    	return sorted;
+    }
+    
+    
+    
+    
+    
+    
 }
