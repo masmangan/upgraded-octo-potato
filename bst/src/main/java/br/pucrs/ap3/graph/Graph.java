@@ -187,7 +187,7 @@ public class Graph {
 	}
 
 	public void kruskal() {
-
+			// TODO:
 	}
 
 	// MST-PRIM(G, w, r)
@@ -203,14 +203,7 @@ public class Graph {
 	// 10.   v.p = u
 	// 11.   v.chave = w(u, v)
 	public void prim(int r) {
-		// Linhas 1 até 3
-		d = new float[m.length]; //chave
-		for (int i = 0; i < d.length; i++) {
-			d[i] = Float.POSITIVE_INFINITY;
-		}
-		p = new int[m.length]; // NIL
-		// Linha 4
-		d[r] = 0;
+		INITIALIZESINGLESOURCE(r);
 		// Linha 5
 		List<Integer> Q = new ArrayList<Integer>();
 		for (int i = 1; i < d.length; i++) {
@@ -243,5 +236,67 @@ public class Graph {
 		n = Q.remove(0);
 		return n;
 	}
+	
+	
+	// SSSP-DIJKSTRA(G, w, s)
+	// 1. INITIALIZE-SINGLE-SOURCE(G, s)
+	// 2. S = O
+	// 3. Q = V[G]
+	// 4. while Q <> VAZIO
+	// 5... u = EXTRACTMIN(Q)
+	// 6... S = S U {u}
+	// 7....for each v E Adj[u]
+	// 8.......RELAX(u, v, w)
+	public void dijkstra(int s) {
+		INITIALIZESINGLESOURCE(s);
+		// Linha 3
+		List<Integer> Q = new ArrayList<Integer>();
+		for (int i = 1; i < d.length; i++) {
+			ENQUEUE(Q, i);
+		}
+		// Linha 4
+		while (!Q.isEmpty()) {
+			// Linha 5
+			Integer u = EXTRACTMIN(Q, d);
+			// Linha 7
+			for (Integer v : Adj(u)) {
+				RELAX(u, v);
+			}
+		}
+		System.out.println(Arrays.toString(p));
+		System.out.println(Arrays.toString(d));
+	}
 
+	// RELAX(u, v, w)
+	// 1. if v.d > u.d + w(u, v)
+	// 2... v.d = u.d + w(u, v)
+	// 3... v.p = u
+	private void RELAX(Integer u, Integer v) {
+		if (d[v] > d[u] + m[u][v] ) {
+			p[v] = u;
+			d[v] = d[u] + m[u][v];
+		}
+	}
+
+	// INITIALIZE-SINGLE-SOURCE(G, s)
+	// 1.for each v E V[G]
+	// 2...v.d = INF
+	// 3...v.p = NIL
+	// 4.s.d = 0
+	private void INITIALIZESINGLESOURCE(int s) {
+		d = new float[m.length]; //chave
+		for (int i = 0; i < d.length; i++) {
+			d[i] = Float.POSITIVE_INFINITY;
+		}
+		p = new int[m.length]; // NIL
+		d[s] = 0;
+	}
+
+	
+	
+	
 }
+
+
+
+
