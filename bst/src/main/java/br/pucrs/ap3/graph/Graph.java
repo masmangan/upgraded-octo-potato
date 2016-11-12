@@ -137,6 +137,7 @@ public class Graph {
 	private int time;
 	private float f[];
 	private ArrayList<Integer> sorted;
+	private int[][] mf;
 
 	public void dfs() {
 		// topological sort
@@ -292,7 +293,27 @@ public class Graph {
 		d[s] = 0;
 	}
 
-	
+	// FORDFULKERSON(G, s, t)
+	// 1. para cada aresta(u, v) E G.E
+	// 2...(u, v).f = 0
+	// 3. enquanto existir um caminho p de s até t na rede residual Gf
+	// 4...cf(p) = min[cf(u, v) : (u,v ) está em p]
+	// 5...para cada aresta(u, v) em p
+	// 6......se (u, v) E E
+	// 7.........(u, v).f = (u, v).f + cf(p)
+	public void fordFulkerson(int s, int t) {
+		// Linhas 1 e 2
+		mf = new int[m.length][m.length];
+		List<Integer> path;
+		while ((path = findPath(s, t)) != null) {
+			// TODO:
+		}
+	}
+
+	private List<Integer> findPath(int s, int t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
