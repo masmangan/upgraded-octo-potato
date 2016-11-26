@@ -4,8 +4,11 @@ import br.pucrs.ap3.graph.Graph;
 import br.pucrs.ap3.heap.Heap;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Class GraphTest is the first assignment...
@@ -134,5 +137,34 @@ public class GraphTest {
         g.dfs();
         float actual[] = g.getF();
         assertArrayEquals(expected, actual, 0.001f);
+    }
+
+    @Test
+    public void testDirectedAdjacentNodes() {
+        Integer[] expected = {2, 3, 4};
+        Graph g = new Graph(4, true);
+        g.addConnection(1, 2);
+        g.addConnection(1, 3);
+        g.addConnection(1, 4);
+
+        Integer[] actual = g.Adj(1).toArray(new Integer[]{});
+
+        assertTrue(Arrays.equals(expected, actual));
+    }
+
+    @Test
+    public void testDirectedAdjacentNodesCount() {
+        int expected = 3;
+        Graph g = new Graph(4, true);
+        g.addConnection(1, 2);
+        g.addConnection(1, 3);
+        g.addConnection(1, 4);
+
+        g.addConnection(2, 1);
+        g.addConnection(3, 1);
+
+        int actual = g.Adj(1).size();
+
+        assertEquals(expected, actual);
     }
 }
