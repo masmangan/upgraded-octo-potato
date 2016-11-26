@@ -1,3 +1,4 @@
+
 package br.pucrs.ap3.bst;
 
 import java.util.ArrayList;
@@ -110,13 +111,8 @@ public class BinarySearchTree {
 	private String toString0(Node node, int level) {
 		if (node == null)
 			return " # ";
-		return toString0(node.left, level + 1) 
-				+ "K=" + node.key 
-				+ " D=" + degree(node) 
-				+ " L=" + level  
-				+ " H=" + height(node)
-				+ " B=" + (height(node.left) - height(node.right))
-				+  toString0(node.right, level + 1);
+		return toString0(node.left, level + 1) + "K=" + node.key + " D=" + degree(node) + " L=" + level + " H="
+				+ height(node) + " B=" + (height(node.left) - height(node.right)) + toString0(node.right, level + 1);
 	}
 
 	private int height(Node node) {
@@ -131,7 +127,7 @@ public class BinarySearchTree {
 			d++;
 		if (node.right != null)
 			d++;
-		
+
 		return d;
 	}
 
@@ -152,6 +148,69 @@ public class BinarySearchTree {
 
 		getLevel0(node.left, c + 1, level, nodes);
 		getLevel0(node.right, c + 1, level, nodes);
+	}
+
+	/**
+	 * Apresente os níveis da árvore que são formados por números ímpares
+	 * 
+	 */
+	public void printByOddLevel() {
+		int c = 0;
+		List<Integer> level = getLevel(c);
+		while (!level.isEmpty()) {
+
+			boolean print = true;
+			for (Integer e : level) {
+				if (e % 2 == 0) {
+					print = false;
+				}
+			}
+			if (print) {
+				// System.out.println(level);
+				System.out.println("Nível: " + c);
+			}
+			//
+			c = c + 1;
+			level = getLevel(c);
+		}
+
+	}
+
+	/**
+	 * 6. Escreva um algoritmo que apresente o caminho de um nodo que contém um
+	 * determinado valor até a sua folha, considerando o caminho de maior
+	 * altura.
+	 * 
+	 */
+	public void getPathToLeaf(int key) {
+		List<Integer> path = getPathToLeaf0(key, root);
+		System.out.println(path);
+	}
+
+	private List<Integer> getPathToLeaf0(int key, Node node) {
+		if (node == null)
+			return null;
+		if (node.key == key) {
+			List<Integer> pathFrom = getPathToLeaf1(node);
+			return pathFrom;
+		}
+		if (node.key > key)
+			return getPathToLeaf0(key, node.left);
+		return getPathToLeaf0(key, node.right);
+	}
+
+	private List<Integer> getPathToLeaf1(Node node) {
+		if (node == null)
+			return  new ArrayList<Integer>();
+		List<Integer> left = getPathToLeaf1(node.left);
+		List<Integer> right = getPathToLeaf1(node.right);
+		if (left.size() > right.size()) {
+			left.add(node.key);
+			return left;
+		} else {
+			right.add(node.key);
+			return right;
+		}
 	}
 
 }
