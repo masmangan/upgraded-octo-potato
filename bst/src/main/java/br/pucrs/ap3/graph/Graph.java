@@ -314,6 +314,22 @@ public class Graph {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public List<Integer> adjacente(int n) {
+		if (n < 1 || n >= m.length) {
+			throw new IllegalArgumentException();
+		}
+		
+		ArrayList<Integer> r = new ArrayList<Integer>();
+		
+		for (int j = 1; j < m.length; j++) {
+			if (m[n][j] != 0 && m[n][j] != Float.POSITIVE_INFINITY) {
+				r.add(j);
+			}
+		}
+		
+		return r;
+	}
 	
 	
 }
