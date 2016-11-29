@@ -330,6 +330,34 @@ public class Graph {
 		
 		return r;
 	}
+
+	public ArrayList<Integer> saldoNodos() {
+		
+		ArrayList<Integer> resultado = new ArrayList<Integer>();
+		
+		int[] origem = new int[m.length];
+		int[] destino = new int[m.length];
+		
+		
+		for(int i = 1; i< m.length; i++) {
+			
+			for(int k = 1; k< m.length; k++) {
+				
+				origem[i] += m[i][k];
+				
+				destino[i] += m[k][i];
+				
+			}
+			
+		}
+		
+		for(int l = 0; l < m.length; l++) {
+			resultado.add(origem[l] - destino[l]);
+		}
+		
+		return resultado;
+	}
+	
 	
 	
 }
