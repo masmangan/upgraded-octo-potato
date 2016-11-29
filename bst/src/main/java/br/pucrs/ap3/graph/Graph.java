@@ -73,7 +73,7 @@ public class Graph {
 			throw new IllegalArgumentException();
 		List<Integer> r = new ArrayList<Integer>();
 		for (int j = 1; j < m.length; j++) {
-			if (m[n][j] != 0) {
+			if (m[n][j] != 0 || (directed && m[j][n] != 0)) {
 				r.add(j);
 			}
 		}
